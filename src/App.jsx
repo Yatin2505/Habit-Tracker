@@ -11,6 +11,7 @@ import InsightsPage from './pages/Insights'
 import NotFoundPage from './pages/NotFound'
 import ProgressPage from './pages/Progress'
 import SettingsPage from './pages/Settings'
+import ProfileSetup from './components/profile/ProfileSetup'
 
 function AppShell() {
   const location = useLocation()
@@ -48,6 +49,7 @@ function AppShell() {
         </div>
       </div>
       <MobileNav />
+      <ProfileSetup />
     </div>
   )
 }

@@ -1,5 +1,4 @@
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import defaultHabits from '../data/defaultHabits'
 import { formatISODate } from '../utils/dateUtils'
 import { normalizeHabit, safeParseJson } from '../utils/habitUtils'
 import { useLocalStorage } from './useLocalStorage'
@@ -14,32 +13,36 @@ export function HabitProvider({ children }) {
     if (bootstrapped) return
 
     const loadHabits = async () => {
-      try {
-        const response = await fetch('/api/habits')
-        if (!response.ok) throw new Error('Habit API request failed')
-        const payload = await response.json()
-        const remoteHabits = Array.isArray(payload.habits)
-          ? payload.habits.map(normalizeHabit).filter(Boolean)
-          : []
+      const stored = safeParseJson(window.localStorage.getItem('habitflow_habits') ?? 'null')
+      const localHabits = Array.isArray(stored) ? stored.map(normalizeHabit).filter(Boolean) : []
 
-        if (remoteHabits.length) {
-          setHabits(remoteHabits)
-        } else {
-          const stored = safeParseJson(window.localStorage.getItem('habitflow_habits') ?? 'null')
-          const localHabits = Array.isArray(stored) ? stored.map(normalizeHabit).filter(Boolean) : []
-          const initial = localHabits.length ? localHabits : defaultHabits()
-          setHabits(initial)
+      try {
+        // Browser storage is the immediate source of truth for this device.
+        // Do not replace local progress with an older or empty API response.
+        if (localHabits.length) {
+          setHabits(localHabits)
           await fetch('/api/habits', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ habits: initial }),
+            body: JSON.stringify({ habits: localHabits }),
           })
+        } else {
+          const response = await fetch('/api/habits')
+          if (!response.ok) throw new Error('Habit API request failed')
+          const payload = await response.json()
+          const remoteHabits = Array.isArray(payload.habits)
+            ? payload.habits.map(normalizeHabit).filter(Boolean)
+            : []
+
+          if (remoteHabits.length) {
+            setHabits(remoteHabits)
+          } else {
+            setHabits([])
+          }
         }
       } catch (error) {
         console.error('Unable to load habits from MongoDB:', error)
-        const stored = safeParseJson(window.localStorage.getItem('habitflow_habits') ?? 'null')
-        const localHabits = Array.isArray(stored) ? stored.map(normalizeHabit).filter(Boolean) : []
-        setHabits(localHabits.length ? localHabits : defaultHabits())
+        setHabits(localHabits)
       }
 
       setBootstrapped(true)

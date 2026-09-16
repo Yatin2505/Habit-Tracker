@@ -1,4 +1,4 @@
-import { BarChart3, CalendarDays, Flame, Home, LayoutList, Lightbulb, Settings } from 'lucide-react'
+import { BarChart3, CalendarDays, Home, LayoutList, Lightbulb, Settings } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
@@ -14,13 +14,7 @@ export default function Sidebar() {
   return (
     <aside className="hidden w-[250px] shrink-0 border-r border-white/10 bg-slate-950/80 p-5 lg:flex lg:flex-col">
       <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-lime-400/15 text-lime-300">
-          <Flame size={20} />
-        </div>
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">discipline</p>
-          <h1 className="text-xl font-semibold text-white">HabitFlow</h1>
-        </div>
+        <img src="/logo.svg" alt="HabitFlow" className="h-12 w-auto" />
       </div>
 
       <nav className="space-y-2">

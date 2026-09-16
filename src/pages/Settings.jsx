@@ -2,13 +2,13 @@ import { useRef } from 'react'
 import { Download, Import, RotateCcw, ShieldAlert } from 'lucide-react'
 import { useHabits } from '../hooks/useHabits'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import defaultHabits from '../data/defaultHabits'
 import { isHabitShapeValid, safeParseJson } from '../utils/habitUtils'
 
 export default function SettingsPage() {
   const { habits, setHabits } = useHabits()
   const [theme, setTheme] = useLocalStorage('habitflow_theme', 'dark')
   const [weekStartsOn, setWeekStartsOn] = useLocalStorage('habitflow_week_start', 'Monday')
+  const [profile, setProfile] = useLocalStorage('habitflow_profile', { name: '', age: '' })
   const inputRef = useRef(null)
 
   const handleExport = () => {
@@ -40,7 +40,7 @@ export default function SettingsPage() {
   const handleReset = () => {
     const confirmed = window.confirm('This will permanently delete all habits and history.\n\nContinue?')
     if (!confirmed) return
-    setHabits(defaultHabits())
+    setHabits([])
   }
 
   return (
@@ -49,6 +49,20 @@ export default function SettingsPage() {
         <h2 className="text-2xl font-semibold text-white">Settings</h2>
 
         <div className="mt-6 space-y-6">
+          <div>
+            <p className="mb-3 text-sm uppercase tracking-[0.2em] text-zinc-500">Your profile</p>
+            <div className="grid gap-3 md:grid-cols-2">
+              <label className="text-sm text-zinc-300">
+                Name
+                <input value={profile.name} onChange={(event) => setProfile({ ...profile, name: event.target.value })} className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/50 px-3 py-2 text-white outline-none focus:border-lime-400" />
+              </label>
+              <label className="text-sm text-zinc-300">
+                Age
+                <input type="number" min="1" max="120" value={profile.age} onChange={(event) => setProfile({ ...profile, age: event.target.value })} className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/50 px-3 py-2 text-white outline-none focus:border-lime-400" />
+              </label>
+            </div>
+          </div>
+
           <div>
             <p className="mb-3 text-sm uppercase tracking-[0.2em] text-zinc-500">Appearance</p>
             <div className="grid gap-3 md:grid-cols-3">

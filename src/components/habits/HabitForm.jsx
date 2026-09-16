@@ -74,7 +74,6 @@ export default function HabitForm({ initialData, onSubmit, onCancel }) {
           value={form.name}
           onChange={(event) => handleChange('name', event.target.value)}
           className="w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2.5 text-white outline-none ring-0 transition focus:border-lime-400"
-          placeholder="Code for 2 hours"
         />
       </div>
 
@@ -85,7 +84,6 @@ export default function HabitForm({ initialData, onSubmit, onCancel }) {
           onChange={(event) => handleChange('description', event.target.value)}
           className="w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-lime-400"
           rows="3"
-          placeholder="Optional note"
         />
       </div>
 
@@ -144,7 +142,6 @@ export default function HabitForm({ initialData, onSubmit, onCancel }) {
           value={form.target}
           onChange={(event) => handleChange('target', event.target.value)}
           className="w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-lime-400"
-          placeholder="2 hours, 8 glasses, 30 minutes"
         />
       </div>
 

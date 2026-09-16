@@ -1,7 +1,9 @@
 import { Sparkles } from 'lucide-react'
 import { getGreeting } from '../../utils/dateUtils'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 export default function WelcomeSection() {
+  const [profile] = useLocalStorage('habitflow_profile', { name: 'there', age: '' })
   const today = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
     month: 'long',
@@ -13,8 +15,10 @@ export default function WelcomeSection() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm uppercase tracking-[0.28em] text-zinc-400">{getGreeting()}</p>
-          <h2 className="mt-2 text-3xl font-semibold text-white">Yatin 👋</h2>
-          <p className="mt-2 max-w-xl text-sm text-zinc-300">Stay consistent. Small actions compound.</p>
+          <h2 className="mt-2 text-3xl font-semibold text-white">{profile.name || 'there'} 👋</h2>
+          <p className="mt-2 max-w-xl text-sm text-zinc-300">
+            Stay consistent. Small actions compound{profile.age ? ` at age ${profile.age}.` : '.'}
+          </p>
         </div>
         <div className="rounded-2xl border border-lime-400/20 bg-lime-400/10 p-3 text-lime-300">
           <Sparkles size={18} />

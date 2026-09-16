@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react'
+import { Crown } from 'lucide-react'
 import { getGreeting } from '../../utils/dateUtils'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 
@@ -11,20 +11,20 @@ export default function WelcomeSection() {
   }).format(new Date())
 
   return (
-    <section className="rounded-3xl border border-white/10 bg-gradient-to-r from-slate-900 via-slate-900 to-lime-500/5 p-5 shadow-xl shadow-slate-950/20 md:p-6">
+    <section className="neon-panel rounded-3xl p-6 md:p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm uppercase tracking-[0.28em] text-zinc-400">{getGreeting()}</p>
-          <h2 className="mt-2 text-3xl font-semibold text-white">{profile.name || 'there'} 👋</h2>
-          <p className="mt-2 max-w-xl text-sm text-zinc-300">
+          <p className="neon-label text-xs font-semibold">{getGreeting()}</p>
+          <h2 className="mt-3 text-4xl font-bold tracking-tight text-white">{profile.name || 'there'} <Crown className="mb-1 inline text-violet-300" size={30} /></h2>
+          <p className="mt-3 max-w-xl text-sm text-slate-300">
             Stay consistent. Small actions compound{profile.age ? ` at age ${profile.age}.` : '.'}
           </p>
         </div>
-        <div className="rounded-2xl border border-lime-400/20 bg-lime-400/10 p-3 text-lime-300">
-          <Sparkles size={18} />
+        <div className="rounded-2xl border border-violet-400/40 bg-violet-500/15 p-3 text-violet-300">
+          <Crown size={20} />
         </div>
       </div>
-      <div className="mt-4 text-sm text-zinc-400">{today}</div>
+      <div className="mt-5 text-sm text-slate-400">{today}</div>
     </section>
   )
 }

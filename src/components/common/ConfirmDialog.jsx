@@ -2,8 +2,8 @@ export default function ConfirmDialog({ open, title, description, onCancel, onCo
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 p-6 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#05051a]/85 p-4 backdrop-blur-sm">
+      <div className="neon-panel w-full max-w-md rounded-2xl p-6">
         <h3 className="text-xl font-semibold text-white">{title}</h3>
         <p className="mt-2 text-sm text-zinc-400">{description}</p>
         <div className="mt-6 flex justify-end gap-3">

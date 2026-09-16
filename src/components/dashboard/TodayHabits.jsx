@@ -3,10 +3,10 @@ import { iconMap } from '../../utils/iconMap'
 
 export default function TodayHabits({ habits, onToggle }) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-slate-900/90 p-4 md:p-5">
+    <section className="neon-panel rounded-3xl p-4 md:p-5">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-xl font-semibold text-white">Today&apos;s Habits</h3>
-        <span className="rounded-full bg-lime-400/10 px-2 py-1 text-xs text-lime-300">
+        <span className="rounded-full bg-violet-500/15 px-2 py-1 text-xs text-violet-200">
           {habits.filter((habit) => Boolean(habit.completions?.[new Date().toISOString().slice(0, 10)])).length} / {habits.length}
         </span>
       </div>
@@ -24,7 +24,7 @@ export default function TodayHabits({ habits, onToggle }) {
               <div
                 key={habit.id}
                 className={`flex items-center justify-between rounded-2xl border p-3 transition ${
-                  done ? 'border-lime-400/30 bg-lime-400/5' : 'border-white/10 bg-slate-950/40'
+                  done                   ? 'border-violet-400/40 bg-violet-500/10' : 'border-white/10 bg-slate-950/40'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -50,8 +50,8 @@ export default function TodayHabits({ habits, onToggle }) {
                   onClick={() => onToggle(habit.id)}
                   className={`flex h-10 w-10 items-center justify-center rounded-xl border transition ${
                     done
-                      ? 'border-lime-400/40 bg-lime-400 text-slate-950'
-                      : 'border-white/10 bg-slate-950 text-zinc-300 hover:border-lime-400/30 hover:text-lime-300'
+                      ? 'border-violet-400/40 bg-violet-400 text-slate-950'
+                      : 'border-white/10 bg-slate-950 text-zinc-300 hover:border-violet-400/30 hover:text-violet-300'
                   }`}
                 >
                   {done ? <Check size={18} /> : <Circle size={18} />}

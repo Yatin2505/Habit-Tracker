@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const delta = Math.max(0, Math.round(todaySummary.percent - lastWeekAverage))
 
   return (
-    <div className="space-y-6 pb-24 lg:pb-8">
+    <div className="space-y-7 pb-24 lg:pb-8">
       <WelcomeSection />
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

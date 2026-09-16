@@ -28,7 +28,7 @@ function AppShell() {
   const title = titles[location.pathname] || 'Dashboard'
 
   return (
-    <div className="min-h-screen bg-slate-950 text-zinc-100">
+    <div className="min-h-screen bg-[#05051a] text-zinc-100">
       <div className="mx-auto flex max-w-[1600px]">
         <Sidebar />
         <div className="min-h-screen flex-1">

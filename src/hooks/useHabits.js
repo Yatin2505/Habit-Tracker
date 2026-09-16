@@ -15,11 +15,12 @@ export function HabitProvider({ children }) {
     const loadHabits = async () => {
       const stored = safeParseJson(window.localStorage.getItem('habitflow_habits') ?? 'null')
       const localHabits = Array.isArray(stored) ? stored.map(normalizeHabit).filter(Boolean) : []
+      const hasLocalData = Array.isArray(stored)
 
       try {
         // Browser storage is the immediate source of truth for this device.
         // Do not replace local progress with an older or empty API response.
-        if (localHabits.length) {
+        if (hasLocalData) {
           setHabits(localHabits)
           await fetch('/api/habits', {
             method: 'PUT',
